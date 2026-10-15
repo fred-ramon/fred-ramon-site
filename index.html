@@ -11,7 +11,7 @@
 body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.6}
 .hero{color:var(--ink);padding:72px 24px 96px;text-align:center;border-bottom:1px solid var(--line);
 background:repeating-linear-gradient(0deg,rgba(56,189,248,.07) 0 1px,transparent 1px 32px),repeating-linear-gradient(90deg,rgba(56,189,248,.07) 0 1px,transparent 1px 32px),linear-gradient(160deg,#0b1222 0%,#1e293b 60%,#0f2a2a 100%)}
-.mono{width:104px;height:104px;border-radius:50%;margin:0 auto 22px;display:flex;align-items:center;justify-content:center;font:700 38px var(--mono);letter-spacing:2px;color:var(--blue);background:#0f172a;border:2px solid var(--blue);box-shadow:0 0 24px rgba(56,189,248,.45),inset 0 0 14px rgba(56,189,248,.2);text-shadow:0 0 12px rgba(56,189,248,.8)}
+.avatar{display:block;width:128px;height:128px;border-radius:50%;object-fit:cover;margin:0 auto 22px;border:3px solid #38bdf8;box-shadow:0 0 22px rgba(56,189,248,.45),0 0 44px rgba(52,211,153,.25)}
 h1{font-size:clamp(2rem,5vw,2.9rem);line-height:1.15;margin-bottom:10px;color:#f8fafc}
 .hero p.tag{color:#cbd5e1;font-size:1.1rem;max-width:620px;margin:0 auto 28px}
 .btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
@@ -49,12 +49,12 @@ ul.beyond{list-style:none;margin-top:12px;color:var(--ink)}
 ul.beyond li{padding:3px 0 3px 20px;position:relative}
 ul.beyond li::before{content:">";position:absolute;left:0;color:var(--green);font-family:var(--mono);font-weight:700}
 footer{text-align:center;color:var(--muted);font:.8rem var(--mono);padding:8px 0 32px}
-@media(max-width:560px){.hero{padding:56px 20px 84px}ul.roles li{flex-direction:column;gap:2px}.card{padding:22px}}
+@media(max-width:560px){.avatar{width:112px;height:112px}.hero{padding:56px 20px 84px}ul.roles li{flex-direction:column;gap:2px}.card{padding:22px}}
 </style>
 </head>
 <body>
 <header class="hero">
-  <div class="mono" aria-hidden="true">FR</div>
+  <img class="avatar" src="photo.jpg" alt="Fred Ramon" width="128" height="128">
   <h1>Fred Ramon</h1>
   <p class="tag">Technology executive with 30+ years of senior leadership in enterprise IT, cybersecurity, and digital transformation, based in South Florida.</p>
   <div class="btns">
