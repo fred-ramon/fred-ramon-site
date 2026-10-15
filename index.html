@@ -29,6 +29,12 @@ ul.roles li:last-child{border-bottom:0}
 .yrs{color:var(--muted);font-size:.9rem;white-space:nowrap}
 .chips{display:flex;flex-wrap:wrap;gap:8px}
 .chips span{background:#eef2ff;color:#33408f;padding:6px 12px;border-radius:999px;font-size:.9rem}
+form{display:grid;gap:12px}
+label{font-size:.9rem;font-weight:600}
+input,textarea{width:100%;font:inherit;padding:10px 12px;border:1px solid var(--line);border-radius:10px;margin-top:4px}
+textarea{min-height:120px;resize:vertical}
+form .send{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border:0;cursor:pointer;justify-self:start;font:inherit;font-weight:600}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
 footer{text-align:center;color:var(--muted);font-size:.85rem;padding:8px 0 32px}
 @media(max-width:560px){.hero{padding:56px 20px 84px}ul.roles li{flex-direction:column;gap:2px}.card{padding:22px}}
 </style>
@@ -66,6 +72,21 @@ footer{text-align:center;color:var(--muted);font-size:.85rem;padding:8px 0 32px}
   <section class="card">
     <h2>Education</h2>
     <p><strong style="color:var(--ink)">San Antonio College</strong><br>B.S., Computer Science and Electrical Engineering</p>
+  </section>
+  <section class="card" id="contact">
+    <h2>Get in touch</h2>
+    <!-- TODO: After FormSubmit's one-time activation email is confirmed, replace the address in the action URL
+         with FormSubmit's random alias (https://formsubmit.co/<alias>) so the email is not visible in page source. -->
+    <form action="https://formsubmit.co/fred@ramon.net" method="POST">
+      <input type="hidden" name="_subject" value="New message from ramon.net">
+      <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="_captcha" value="true">
+      <div class="hp" aria-hidden="true"><input type="text" name="_honey" tabindex="-1" autocomplete="off"></div>
+      <label>Name<input type="text" name="name" required></label>
+      <label>Email<input type="email" name="email" required></label>
+      <label>Message<textarea name="message" required></textarea></label>
+      <button type="submit" class="btn send">Send</button>
+    </form>
   </section>
 </main>
 <footer>© 2026 Fred Ramon</footer>
