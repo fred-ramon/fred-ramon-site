@@ -95,6 +95,114 @@ footer{text-align:center;color:var(--muted);font:.8rem var(--mono);padding:8px 0
       <li>Lifelong learner</li>
     </ul>
   </section>
+  <section class="card">
+    <style>
+      .byte-box{max-height:360px;overflow-y:auto;margin-top:14px;border:1px solid var(--line);border-radius:12px;background:var(--bg);scrollbar-color:var(--line) var(--bg)}
+      .byte-box:empty{display:none}
+      .byte-box li{list-style:none;display:flex;gap:12px;align-items:flex-start;padding:12px 14px;border-bottom:1px solid var(--line)}
+      .byte-box li:last-child{border-bottom:0}
+      .byte-box img{width:76px;height:56px;object-fit:cover;border-radius:8px;flex:none;background:var(--card)}
+      .byte-pub{display:block;color:var(--green);font:600 .72rem var(--mono);text-transform:uppercase;letter-spacing:.08em}
+      .byte-box a{color:var(--ink);font-weight:600;text-decoration:none;line-height:1.35}
+      .byte-box a:hover{color:var(--blue);text-decoration:underline}
+      .byte-meta{display:block;color:var(--muted);font:.78rem var(--mono);margin-top:3px}
+      .byte-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+      .byte-chips button{cursor:pointer;background:var(--bg);color:#bae6fd;border:1px solid rgba(56,189,248,.55);padding:3px 11px;border-radius:999px;font:.78rem var(--mono)}
+      .byte-chips button[aria-pressed="true"]{background:var(--blue);color:var(--bg)}
+      .byte-chips:empty{display:none}
+      .byte-status{color:var(--muted);font:.85rem var(--mono);margin-top:10px;min-height:1.2em}
+      .byte-foot{color:var(--muted);font:.75rem var(--mono);margin-top:12px;opacity:.8}
+      #byte-btn{cursor:pointer;font:inherit;font-weight:600}
+      #byte-btn[disabled]{opacity:.6;cursor:wait}
+    </style>
+    <h2>Today's tech byte</h2>
+    <p>A little free gift for curious minds: a handful of fresh tech stories, mixed from top publications and picked at random each time.</p>
+    <p style="margin-top:14px"><button type="button" id="byte-btn" class="btn primary">Show me something new</button></p>
+    <div class="byte-chips" id="byte-chips" role="group" aria-label="Filter by topic"></div>
+    <div class="byte-status" id="byte-status" aria-live="polite"></div>
+    <ul class="byte-box" id="byte-list"></ul>
+    <p class="byte-foot">Powered by live tech news · Grok-powered version coming soon</p>
+    <script>
+    (function(){
+      var R='https://api.rss2json.com/v1/api.json?rss_url=';
+      var FEEDS=[
+        ['The Verge','https://www.theverge.com/rss/index.xml'],
+        ['Ars Technica','https://feeds.arstechnica.com/arstechnica/index'],
+        ['TechCrunch','https://techcrunch.com/feed/'],
+        ['Wired','https://www.wired.com/feed/rss'],
+        ['MIT Technology Review','https://www.technologyreview.com/feed/'],
+        ['Engadget','https://www.engadget.com/rss.xml']
+      ];
+      var TOPICS=[['AI',/\b(ai|a\.i\.|artificial intelligence|llm|gpt|openai|anthropic|chatbot|machine learning|neural|gemini|grok)\b/i],
+        ['Security',/\b(security|hack|hacker|breach|malware|ransomware|vulnerab|exploit|privacy|phishing|cyber)/i],
+        ['Gadgets',/\b(iphone|android|pixel|galaxy|laptop|gadget|headphone|earbuds|camera|watch|tablet|ipad|console|switch|gear|review|tv)\b/i],
+        ['Science',/\b(science|space|nasa|climate|biotech|health|energy|physics|rocket|quantum|biology)\b/i],
+        ['Business',/\b(startup|funding|venture|ipo|acquisi|layoff|raises|valuation|antitrust|lawsuit|regulat)/i],
+        ['Dev',/\b(code|coding|programming|developer|open source|linux|rust|python|javascript|database|compiler|github)\b/i]];
+      var btn=document.getElementById('byte-btn'),list=document.getElementById('byte-list'),status=document.getElementById('byte-status'),chips=document.getElementById('byte-chips');
+      var pool=[],shown={},topic='All',failed=[];
+      function ago(t){var d=new Date(String(t).replace(' ','T')+(/Z|[+-]\d\d:?\d\d$/.test(t)?'':'Z'));var s=(Date.now()-d)/1000;if(!(s>=0))return '';if(s<3600)return Math.max(1,Math.round(s/60))+'m ago';if(s<86400)return Math.round(s/3600)+'h ago';return Math.round(s/86400)+'d ago';}
+      function safeUrl(u){try{var x=new URL(u);return /^https?:$/.test(x.protocol)?x.href:'';}catch(e){return '';}}
+      function host(u){try{return new URL(u).hostname.replace(/^www\./,'');}catch(e){return '';}}
+      function txt(h){var d=new DOMParser().parseFromString('<p>'+(h||'')+'</p>','text/html');return (d.body.textContent||'').trim();}
+      function tag(it,extra){var s=it.title+' '+(extra||'');var t=[];TOPICS.forEach(function(p){if(p[1].test(s))t.push(p[0]);});return t;}
+      function timeout(p,ms){return Promise.race([p,new Promise(function(_,r){setTimeout(function(){r(new Error('timeout'));},ms);})]);}
+      function getJSON(u){return timeout(fetch(u),12000).then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json();});}
+      function loadFeed(f){return getJSON(R+encodeURIComponent(f[1])).then(function(d){
+        if(d.status!=='ok')throw new Error('feed');
+        return (d.items||[]).map(function(i){var link=safeUrl(i.link);if(!link)return null;
+          var img=safeUrl(i.thumbnail||(i.enclosure&&/image/.test(i.enclosure.type||'image')&&i.enclosure.link)||'');
+          var title=txt(i.title);return {src:f[0],title:title,url:link,img:img,when:ago(i.pubDate),detail:'',topics:tag({title:title},(i.categories||[]).join(' '))};}).filter(Boolean);
+      });}
+      function loadHN(){return getJSON('https://hn.algolia.com/api/v1/search?tags=front_page&hitsPerPage=40').then(function(d){
+        return (d.hits||[]).filter(function(h){return h.title;}).map(function(h){var u=safeUrl(h.url)||('https://news.ycombinator.com/item?id='+encodeURIComponent(h.objectID));
+          return {src:'Hacker News',title:h.title,url:u,img:'',when:ago(h.created_at),detail:(h.points||0)+' pts · '+host(u),topics:tag(h)};});});}
+      function load(){
+        var jobs=FEEDS.map(function(f){return loadFeed(f).catch(function(){failed.push(f[0]);return [];});});
+        jobs.push(loadHN().catch(function(){failed.push('Hacker News');return [];}));
+        return Promise.all(jobs).then(function(groups){
+          var seen={};pool=[];
+          groups.forEach(function(g){g.forEach(function(it){var k=it.url.replace(/[?#].*$/,'').replace(/\/$/,'')+'|';var kt=it.title.toLowerCase().replace(/\W+/g,' ').trim();
+            if(seen[k]||seen[kt])return;seen[k]=seen[kt]=1;pool.push(it);});});
+          if(!pool.length)throw new Error('no stories');
+          buildChips();
+        });
+      }
+      function buildChips(){
+        var names=['All'];TOPICS.forEach(function(t){if(pool.some(function(i){return i.topics.indexOf(t[0])>=0;}))names.push(t[0]);});
+        chips.textContent='';
+        names.forEach(function(n){var b=document.createElement('button');b.type='button';b.textContent=n;b.setAttribute('aria-pressed',n===topic?'true':'false');
+          b.addEventListener('click',function(){topic=n;Array.prototype.forEach.call(chips.children,function(c){c.setAttribute('aria-pressed',c===b?'true':'false');});render();});chips.appendChild(b);});
+      }
+      function shuffle(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t;}return a;}
+      function render(){
+        var cand=pool.filter(function(i){return topic==='All'||i.topics.indexOf(topic)>=0;});
+        var fresh=cand.filter(function(i){return !shown[i.url];});
+        if(fresh.length<8){cand.forEach(function(i){delete shown[i.url];});fresh=cand.slice();}
+        var by={};shuffle(fresh).forEach(function(i){(by[i.src]=by[i.src]||[]).push(i);});
+        var srcs=shuffle(Object.keys(by)),pick=[];
+        while(pick.length<8&&srcs.some(function(s){return by[s].length;})){srcs.forEach(function(s){if(pick.length<8&&by[s].length)pick.push(by[s].shift());});}
+        list.textContent='';
+        pick.forEach(function(it){
+          shown[it.url]=1;
+          var li=document.createElement('li'),body=document.createElement('div'),p=document.createElement('span'),a=document.createElement('a'),m=document.createElement('span');
+          if(it.img){var im=document.createElement('img');im.src=it.img;im.alt='';im.loading='lazy';im.referrerPolicy='no-referrer';im.onerror=function(){im.remove();};li.appendChild(im);}
+          p.className='byte-pub';p.textContent=it.src;
+          a.href=it.url;a.target='_blank';a.rel='noopener';a.textContent=it.title;
+          m.className='byte-meta';m.textContent=[it.detail,it.when].concat(it.topics.slice(0,2)).filter(Boolean).join(' · ');
+          body.appendChild(p);body.appendChild(a);body.appendChild(m);li.appendChild(body);list.appendChild(li);
+        });
+        list.scrollTop=0;
+        status.textContent=pick.length?'Click again for a different mix.'+(failed.length?' (Unavailable right now: '+failed.join(', ')+')':''):'No stories for this topic right now.';
+      }
+      btn.addEventListener('click',function(){
+        if(pool.length){render();return;}
+        btn.disabled=true;status.textContent='Gathering fresh stories…';failed=[];
+        load().then(render).catch(function(){status.textContent='Couldn\u2019t reach the news feeds right now. Please try again in a moment.';}).then(function(){btn.disabled=false;});
+      });
+    })();
+    </script>
+  </section>
   <section class="card" id="contact">
     <h2>Get in touch</h2>
     <!-- TODO: After FormSubmit's one-time activation email is confirmed, replace the address in the action URL
