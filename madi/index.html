@@ -100,7 +100,13 @@ body{background:var(--bg)}html{background:var(--bg)}
 .txt input:focus,.txt textarea:focus{border-color:#CC0000;box-shadow:0 0 10px rgba(204,0,0,.35)}
 .txt .full{grid-column:1/-1}.txt textarea{min-height:110px;resize:vertical}
 .txt .row{grid-column:1/-1;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
-.txt button{background:#8B0000;color:#fff;border:2px solid #8B0000;font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-size:.85rem;padding:11px 22px;opacity:.55;cursor:not-allowed}
+.txt button{background:#8B0000;color:#fff;border:2px solid #CC0000;font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-size:.85rem;padding:11px 22px;cursor:pointer;font-family:inherit;transition:.2s}
+.txt button:hover{background:#CC0000;box-shadow:0 0 14px rgba(204,0,0,.5)}
+.txt button:disabled{opacity:.55;cursor:wait;box-shadow:none;background:#8B0000}
+.txt .hp{position:absolute!important;left:-9999px;width:1px;height:1px;overflow:hidden}
+.txt .status{grid-column:1/-1;margin:0;font:700 .78rem/1.4 "Courier New",monospace;letter-spacing:.12em;text-transform:uppercase;color:#fff;border-left:3px solid #CC0000;padding:8px 12px;background:rgba(204,0,0,.08)}
+.txt .status[hidden]{display:none}.txt .status.err{color:#ff6b6b;background:rgba(204,0,0,.16)}
+.txt input:invalid:not(:placeholder-shown){border-color:#8B0000}
 .txt .note{font-size:.8rem;color:#8a8a90}
 @media(max-width:600px){.txt form{grid-template-columns:1fr}}
 </style>
@@ -131,13 +137,38 @@ body{background:var(--bg)}html{background:var(--bg)}
   <section class="card txt secwrap" id="text" hidden>
     <h2 class="sec">Shoot me a text</h2>
     <p class="sub">Want to connect about a project or production? Drop me a message and it comes straight to my phone.</p>
-    <form onsubmit="return false" aria-describedby="txtnote">
-      <label>Your name<input type="text" name="name" placeholder="First and last name" autocomplete="name"></label>
-      <label>Your phone<input type="tel" name="phone" placeholder="So I can text you back" autocomplete="tel"></label>
-      <label class="full">Message<textarea name="message" maxlength="300" placeholder="What's on your mind?"></textarea></label>
-      <div class="row"><button type="submit" disabled>Send text &#9658;</button><span class="note" id="txtnote">Preview only. Texting isn't switched on yet.</span></div>
+    <form id="txtform" aria-describedby="txtnote" novalidate>
+      <label>Your name<input type="text" name="name" placeholder="First and last name" autocomplete="name" maxlength="60" required></label>
+      <label>Your phone<input type="tel" name="phone" placeholder="So I can text you back" autocomplete="tel" inputmode="tel" pattern="^\s*(\+?1[\s.\-]?)?\(?[2-9]\d{2}\)?[\s.\-]?\d{3}[\s.\-]?\d{4}\s*$" title="10-digit US phone number" required></label>
+      <label class="full">Message<textarea name="message" maxlength="300" placeholder="What's on your mind?" required></textarea></label>
+      <div class="hp" aria-hidden="true"><label>Website<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
+      <div class="row"><button type="submit">Send text &#9658;</button><span class="note" id="txtnote">Your number is included so Madi can text you back.</span></div>
+      <p class="status" id="txtstatus" role="status" aria-live="polite" hidden></p>
     </form>
   </section>
+<script>
+(function(){
+  var RELAY_URL='https://madi-text-relay.REPLACE.workers.dev';
+  var f=document.getElementById('txtform'),st=document.getElementById('txtstatus'),btn=f.querySelector('button[type=submit]'),lbl=btn.innerHTML;
+  function show(msg,err){st.textContent=msg;st.className='status'+(err?' err':'');st.hidden=false}
+  f.addEventListener('submit',function(e){
+    e.preventDefault();
+    var el=f.elements,name=el.name.value.trim(),phone=el.phone.value.trim(),message=el.message.value.trim();
+    if(!name){show('Please add your name.',1);el.name.focus();return}
+    if(!el.phone.checkValidity()||!phone){show('Please enter a valid 10-digit US phone number.',1);el.phone.focus();return}
+    if(!message){show('Please write a message.',1);el.message.focus();return}
+    btn.disabled=true;btn.textContent='Sending…';show('Sending your text…');
+    fetch(RELAY_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:name,phone:phone,message:message,website:el.website.value})})
+      .then(function(r){return r.json().catch(function(){return {ok:false}})})
+      .then(function(d){
+        if(d&&d.ok){f.reset();show('Sent! Thanks, Madi will text you back soon.')}
+        else show((d&&d.error)||"Your text couldn't be sent. Please try again later.",1);
+      })
+      .catch(function(){show("Your text couldn't be sent. Please check your connection and try again.",1)})
+      .then(function(){btn.disabled=false;btn.innerHTML=lbl});
+  });
+})();
+</script>
 
   <h2 class="sec" style="margin:32px 0 0">Featured highlights</h2>
   <div class="grid">
