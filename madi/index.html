@@ -17,6 +17,7 @@ a{color:var(--red)}
 h1{font-family:Georgia,"Times New Roman",serif;font-weight:400;text-transform:uppercase;letter-spacing:.12em;font-size:clamp(1.7rem,5vw,2.8rem);margin:0;color:#fff;text-shadow:0 0 18px rgba(204,0,0,.35)}
 .hi{margin:6px 0 14px;font-size:1rem;color:var(--red);font-weight:700;letter-spacing:.2em;text-transform:uppercase}
 .btn{display:inline-block;margin-top:14px;background:#000;color:#fff;border:2px solid var(--red);font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-size:.85rem;text-decoration:none;padding:11px 22px;transition:.2s}
+.btns{display:flex;flex-wrap:wrap;gap:12px;margin-top:14px}.btns .btn{margin-top:0}.btn.pri{background:var(--red);box-shadow:0 0 14px rgba(204,0,0,.45)}.btn.pri:hover{background:#e00000}
 .btn:hover{background:var(--red);box-shadow:0 0 18px rgba(204,0,0,.6)}
 .about{margin:0;line-height:1.75;color:var(--txt)}
 section.card{background:var(--card);border:1px solid var(--line);padding:28px;margin-top:26px}
@@ -44,7 +45,7 @@ h2.sec::before{content:"";width:28px;height:4px;background:var(--red);box-shadow
 .back{text-align:center;margin-top:34px}
 .back a{font-weight:700;text-decoration:none;letter-spacing:.1em;text-transform:uppercase;font-size:.9rem}
 footer{text-align:center;color:var(--mut);font:.8rem "Courier New",monospace;letter-spacing:.2em;padding:12px 0 24px}
-@media(max-width:600px){.top{grid-template-columns:1fr;text-align:center}.badge{margin:0 auto}.top::after{width:90px}section.card{padding:20px}h2.sec{font-size:1.1rem}}
+@media(max-width:600px){.top{grid-template-columns:1fr;text-align:center}.badge{margin:0 auto}.btns{justify-content:center}.top::after{width:90px}section.card{padding:20px}h2.sec{font-size:1.1rem}}
 </style>
 </head><body>
 <div class="bar" aria-hidden="true"></div>
@@ -56,7 +57,7 @@ footer{text-align:center;color:var(--mut);font:.8rem "Courier New",monospace;let
       <h1>Madison “Madi” Ramon</h1>
       <p class="hi">Film Production Professional</p>
       <p class="about">I love every part of making a production come to life. My hands-on experience spans costume and wardrobe, the art department, camera, audio, production and post-production, on feature films, short films, music videos, live entertainment and performance, and theater. I thrive in fast-paced productions where strong organization, adaptability, attention to detail and clear on-set communication make all the difference.</p>
-      <a class="btn" href="resume.pdf" download>&#9660; Download resume</a>
+      <div class="btns"><a class="btn pri" href="resume.pdf" download>&#9660; Download resume</a> <a class="btn" href="https://www.linkedin.com/in/madison-ramon-6663a837b/" target="_blank" rel="noopener">LinkedIn &#8599;</a></div>
     </div>
   </header>
 
