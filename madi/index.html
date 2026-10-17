@@ -113,6 +113,7 @@ body{background:var(--bg)}html{background:var(--bg)}
 @media(max-width:600px){.btns .btn{min-width:0;width:100%}}
 </style>
 <script>document.addEventListener('DOMContentLoaded',function(){var b=document.getElementById('txtbtn'),t=document.getElementById('text');b.onclick=function(){var o=t.hidden;t.hidden=!o;b.setAttribute('aria-expanded',o);if(o)t.scrollIntoView({behavior:'smooth',block:'nearest'})};if(location.hash=='#text'){t.hidden=false;b.setAttribute('aria-expanded',true)}});</script>
+<style>.btns .btn,.btns .btn.pri,.btns .btn:hover,.btns .btn.pri:hover{background:#000;border-color:#CC0000}.btns .btn:hover{box-shadow:0 0 14px rgba(204,0,0,.5)}</style>
 </head><body>
 <div class="bgl" aria-hidden="true"><i style="background-image:url(stills/set-pink.jpg)"></i><i style="background-image:url(stills/on-set-monitor.jpg)"></i><i style="background-image:url(stills/clapper.jpg)"></i><i style="background-image:url(stills/script-notebook.jpg)"></i><i style="background-image:url(stills/crew-hallway.jpg)"></i><i style="background-image:url(stills/wardrobe-pink.jpg)"></i></div>
 <div class="bar" aria-hidden="true"></div>
@@ -124,7 +125,7 @@ body{background:var(--bg)}html{background:var(--bg)}
       <h1>Madison “Madi” Ramon</h1>
       <p class="hi">Film Production Professional</p>
       <p class="about">I love every part of making a production come to life. My hands-on experience spans costume and wardrobe, the art department, camera, audio, production and post-production, on feature films, short films, music videos, live entertainment and performance, and theater. I thrive in fast-paced productions where strong organization, adaptability, attention to detail and clear on-set communication make all the difference.</p>
-      <div class="btns"><button type="button" class="btn" id="txtbtn" aria-expanded="false" aria-controls="text">&#9993; Shoot me a text</button> <a class="btn pri" href="resume.pdf" download>&#9660; Download resume</a> <a class="btn" href="https://www.linkedin.com/in/madison-ramon-6663a837b/" target="_blank" rel="noopener">LinkedIn &#8599;</a></div>
+      <div class="btns"><button type="button" class="btn" id="txtbtn" aria-expanded="false" aria-controls="text"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="vertical-align:-2px;margin-right:6px"><path d="M4 3h16a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H9l-5 4v-4H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"/></svg>Shoot me a text</button> <a class="btn pri" href="resume.pdf" download>&#9660; Download resume</a> <a class="btn" href="https://www.linkedin.com/in/madison-ramon-6663a837b/" target="_blank" rel="noopener">LinkedIn &#8599;</a></div>
     </div>
   </header>
   <section class="card txt secwrap" id="text" hidden>
