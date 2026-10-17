@@ -92,6 +92,18 @@ body{background:var(--bg)}html{background:var(--bg)}
 .edu.secwrap:hover{z-index:40}
 @media(max-width:900px){.eduwrap{grid-template-columns:1fr}.deck{height:auto;display:flex;gap:18px;justify-content:center;flex-wrap:wrap;padding:10px 0}.deck img{position:static;width:min(44%,215px)}.deck a{flex-basis:100%;display:flex;justify-content:center}.deck .c3{width:130px}.deck .c1,.deck .c2,.deck .c3{transform-origin:50% 50%}.deck .c1:hover,.deck .c2:hover,.deck .c3:hover{transform:scale(1.5)}}
 </style>
+<style>
+.txt h2.sec{margin-bottom:6px}.txt .sub{color:#b9b9bf;margin:0 0 18px}
+.txt form{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.txt label{display:flex;flex-direction:column;gap:6px;font:700 .7rem/1 "Courier New",monospace;letter-spacing:.2em;text-transform:uppercase;color:var(--red)}
+.txt input,.txt textarea{background:#0b0b0c;border:1px solid #3a3a40;color:#f2f2f2;padding:12px;font:1rem/1.4 inherit;font-family:inherit;border-radius:0;outline:none}
+.txt input:focus,.txt textarea:focus{border-color:#CC0000;box-shadow:0 0 10px rgba(204,0,0,.35)}
+.txt .full{grid-column:1/-1}.txt textarea{min-height:110px;resize:vertical}
+.txt .row{grid-column:1/-1;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.txt button{background:#8B0000;color:#fff;border:2px solid #8B0000;font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-size:.85rem;padding:11px 22px;opacity:.55;cursor:not-allowed}
+.txt .note{font-size:.8rem;color:#8a8a90}
+@media(max-width:600px){.txt form{grid-template-columns:1fr}}
+</style>
 </head><body>
 <div class="bgl" aria-hidden="true"><i style="background-image:url(stills/set-pink.jpg)"></i><i style="background-image:url(stills/on-set-monitor.jpg)"></i><i style="background-image:url(stills/clapper.jpg)"></i><i style="background-image:url(stills/script-notebook.jpg)"></i><i style="background-image:url(stills/crew-hallway.jpg)"></i><i style="background-image:url(stills/wardrobe-pink.jpg)"></i></div>
 <div class="bar" aria-hidden="true"></div>
@@ -173,6 +185,16 @@ body{background:var(--bg)}html{background:var(--bg)}
     </div>
   </section>
 
+  <section class="card txt secwrap" id="text">
+    <h2 class="sec">Shoot me a text</h2>
+    <p class="sub">Want to connect about a project or production? Drop me a message and it comes straight to my phone.</p>
+    <form onsubmit="return false" aria-describedby="txtnote">
+      <label>Your name<input type="text" name="name" placeholder="First and last name" autocomplete="name"></label>
+      <label>Your phone<input type="tel" name="phone" placeholder="So I can text you back" autocomplete="tel"></label>
+      <label class="full">Message<textarea name="message" maxlength="300" placeholder="What's on your mind?"></textarea></label>
+      <div class="row"><button type="submit" disabled>Send text &#9658;</button><span class="note" id="txtnote">Preview only. Texting isn't switched on yet.</span></div>
+    </form>
+  </section>
   <p class="back"><a href="/">&larr; Visit my dad's page</a></p>
 </div>
 <div class="bar" aria-hidden="true"></div>
