@@ -11,7 +11,7 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:50;op
 .wrap{max-width:1000px;margin:0 auto;padding:44px 20px 32px}
 a{color:var(--red)}
 .top{display:grid;grid-template-columns:auto 1fr;gap:30px;align-items:center;background:var(--card);border:1px solid var(--line);border-left:6px solid var(--red);padding:32px;position:relative}
-.top::after{content:"";position:absolute;top:0;right:0;width:150px;height:22px;background:repeating-linear-gradient(-45deg,var(--red) 0 14px,#f2f2f2 14px 28px);opacity:.9}
+.top::after{content:"";position:absolute;top:0;right:0;width:150px;height:22px;background:repeating-linear-gradient(-45deg,#111 0 14px,#f2f2f2 14px 28px);opacity:1;outline:1px solid #f2f2f2}
 .badge{display:block;width:150px;height:150px;object-fit:cover;border:3px solid var(--red);box-shadow:0 0 0 6px #000,0 0 28px rgba(204,0,0,.65);filter:contrast(1.05)}
 .slate{font:700 .75rem/1 "Courier New",monospace;letter-spacing:.3em;color:var(--red);text-transform:uppercase;margin:0 0 10px}
 h1{font-family:Georgia,"Times New Roman",serif;font-weight:400;text-transform:uppercase;letter-spacing:.12em;font-size:clamp(1.7rem,5vw,2.8rem);margin:0;color:#fff;text-shadow:0 0 18px rgba(204,0,0,.35)}
