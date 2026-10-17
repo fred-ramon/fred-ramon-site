@@ -118,6 +118,16 @@ body{background:var(--bg)}html{background:var(--bg)}
       <div class="btns"><a class="btn pri" href="resume.pdf" download>&#9660; Download resume</a> <a class="btn" href="https://www.linkedin.com/in/madison-ramon-6663a837b/" target="_blank" rel="noopener">LinkedIn &#8599;</a></div>
     </div>
   </header>
+  <section class="card txt secwrap" id="text">
+    <h2 class="sec">Shoot me a text</h2>
+    <p class="sub">Want to connect about a project or production? Drop me a message and it comes straight to my phone.</p>
+    <form onsubmit="return false" aria-describedby="txtnote">
+      <label>Your name<input type="text" name="name" placeholder="First and last name" autocomplete="name"></label>
+      <label>Your phone<input type="tel" name="phone" placeholder="So I can text you back" autocomplete="tel"></label>
+      <label class="full">Message<textarea name="message" maxlength="300" placeholder="What's on your mind?"></textarea></label>
+      <div class="row"><button type="submit" disabled>Send text &#9658;</button><span class="note" id="txtnote">Preview only. Texting isn't switched on yet.</span></div>
+    </form>
+  </section>
 
   <h2 class="sec" style="margin:32px 0 0">Featured highlights</h2>
   <div class="grid">
@@ -185,16 +195,6 @@ body{background:var(--bg)}html{background:var(--bg)}
     </div>
   </section>
 
-  <section class="card txt secwrap" id="text">
-    <h2 class="sec">Shoot me a text</h2>
-    <p class="sub">Want to connect about a project or production? Drop me a message and it comes straight to my phone.</p>
-    <form onsubmit="return false" aria-describedby="txtnote">
-      <label>Your name<input type="text" name="name" placeholder="First and last name" autocomplete="name"></label>
-      <label>Your phone<input type="tel" name="phone" placeholder="So I can text you back" autocomplete="tel"></label>
-      <label class="full">Message<textarea name="message" maxlength="300" placeholder="What's on your mind?"></textarea></label>
-      <div class="row"><button type="submit" disabled>Send text &#9658;</button><span class="note" id="txtnote">Preview only. Texting isn't switched on yet.</span></div>
-    </form>
-  </section>
   <p class="back"><a href="/">&larr; Visit my dad's page</a></p>
 </div>
 <div class="bar" aria-hidden="true"></div>
