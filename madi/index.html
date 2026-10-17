@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Maddie</title><meta name="robots" content="noindex">
+<style>
+:root{--bg:#0f172a;--card:#1e293b;--line:#334155;--ink:#e2e8f0;--muted:#94a3b8;--blue:#38bdf8;--green:#34d399;--mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.6}
+.hero{color:var(--ink);padding:72px 24px 96px;text-align:center;border-bottom:1px solid var(--line);
+background:repeating-linear-gradient(0deg,rgba(56,189,248,.07) 0 1px,transparent 1px 32px),repeating-linear-gradient(90deg,rgba(56,189,248,.07) 0 1px,transparent 1px 32px),linear-gradient(160deg,#0b1222 0%,#1e293b 60%,#0f2a2a 100%)}
+.avatar{display:block;width:128px;height:128px;border-radius:50%;object-fit:cover;margin:0 auto 22px;border:3px solid #38bdf8;box-shadow:0 0 22px rgba(56,189,248,.45),0 0 44px rgba(52,211,153,.25)}
+h1{font-size:clamp(2rem,5vw,2.9rem);line-height:1.1;margin:0 0 0;color:#f8fafc}
+.hero p.loc{color:#cbd5e1;font-size:1.1rem;font-weight:600;margin:2px 0 14px;line-height:1.35}
+.hero p.tag{color:#cbd5e1;font-size:1.1rem;max-width:620px;margin:0 auto 28px;line-height:1.35}
+.btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.btn{display:inline-block;padding:12px 22px;border-radius:999px;font-weight:600;text-decoration:none;transition:transform .15s,box-shadow .15s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(56,189,248,.3)}
+.btn:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid var(--green);outline-offset:3px}
+.primary,form .send{background:linear-gradient(135deg,var(--blue),var(--green));color:#0f172a;border:0}
+.ghost{border:2px solid var(--blue);color:var(--blue);background:rgba(15,23,42,.6)}
+main{max-width:760px;margin:-56px auto 0;padding:0 20px 48px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:28px;margin-bottom:20px;box-shadow:0 8px 24px rgba(0,0,0,.3)}
+h2{font:600 .85rem var(--mono);text-transform:uppercase;letter-spacing:.12em;color:var(--blue);margin-bottom:14px}
+h2::before{content:"// ";color:var(--green)}
+p{color:var(--muted)}
+strong{color:var(--ink)}
+ul.roles{list-style:none}
+ul.roles li{display:flex;justify-content:space-between;gap:16px;padding:12px 0;border-bottom:1px solid var(--line)}
+ul.roles li:last-child{border-bottom:0}
+.role{font-weight:600}.org{color:var(--muted);font-size:.95rem}
+.yrs{color:var(--green);font:.85rem var(--mono);white-space:nowrap}
+.card:has(.grp){background:repeating-linear-gradient(0deg,rgba(148,163,184,.05) 0 1px,transparent 1px 24px),repeating-linear-gradient(90deg,rgba(148,163,184,.05) 0 1px,transparent 1px 24px),var(--card)}
+.grp{margin-bottom:16px}.grp:last-child{margin-bottom:0}
+h3{font:600 .9rem var(--mono);color:var(--ink);margin-bottom:8px}
+h3::before{content:"> ";color:var(--green)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips span{background:#0f172a;color:#bae6fd;border:1px solid rgba(56,189,248,.55);padding:5px 12px;border-radius:999px;font:.82rem var(--mono)}
+form{display:grid;gap:12px}
+label{font-size:.9rem;font-weight:600;color:var(--ink)}
+input,textarea{width:100%;font:inherit;padding:10px 12px;background:#0f172a;color:var(--ink);border:1px solid var(--line);border-radius:10px;margin-top:4px}
+input::placeholder,textarea::placeholder{color:var(--muted)}
+input:focus,textarea:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(56,189,248,.35);outline:none}
+textarea{min-height:120px;resize:vertical}
+form .send{cursor:pointer;justify-self:start;font:inherit;font-weight:700}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+ul.beyond{list-style:none;margin-top:12px;color:var(--ink)}
+ul.beyond li{padding:3px 0 3px 20px;position:relative}
+ul.beyond li::before{content:">";position:absolute;left:0;color:var(--green);font-family:var(--mono);font-weight:700}
+footer{text-align:center;color:var(--muted);font:.8rem var(--mono);padding:8px 0 32px}
+@media(max-width:560px){.avatar{width:112px;height:112px}.hero{padding:56px 20px 84px}ul.roles li{flex-direction:column;gap:2px}.card{padding:22px}}
+</style>
+<style>.mono{display:flex;align-items:center;justify-content:center;font-size:3rem;font-weight:700;color:#0f172a;background:#38bdf8;border-radius:50%;margin:0 auto 18px}</style>
+</head><body>
+<header class="hero">
+  <div class="avatar mono" aria-hidden="true">M</div>
+  <h1>Maddie</h1>
+  <p class="loc">Welcome to my page</p>
+  <p class="tag">Curious, creative, and always learning something new.</p>
+  <div class="btns"><a class="btn ghost" href="/">Visit my dad's page</a></div>
+</header>
+<main>
+  <section class="card">
+    <h2>What I'm up to now</h2>
+    <p>More about what I'm working on and excited about is coming soon.</p>
+  </section>
+  <section class="card">
+    <h2>Highlights</h2>
+    <p>Proud moments and accomplishments will go here.</p>
+  </section>
+  <section class="card">
+    <h2>Interests &amp; skills</h2>
+    <p>The things I love and the things I'm good at are on the way.</p>
+  </section>
+  <section class="card">
+    <h2>Beyond the everyday</h2>
+    <p>Hobbies, fun facts, and favorite things, coming soon.</p>
+  </section>
+</main>
+<footer>© 2026 Maddie</footer>
+</body></html>
