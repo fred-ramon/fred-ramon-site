@@ -13,7 +13,12 @@ a{color:var(--red)}
 .top{display:grid;grid-template-columns:auto 1fr;gap:30px;align-items:center;background:var(--card);border:1px solid var(--line);border-left:6px solid var(--red);padding:32px;position:relative}
 .top::after{content:"";position:absolute;top:0;right:0;width:150px;height:22px;background:repeating-linear-gradient(-45deg,#111 0 14px,#f2f2f2 14px 28px);opacity:1;outline:1px solid #f2f2f2}
 .badge{display:block;width:150px;height:150px;object-fit:cover;border:3px solid var(--red);box-shadow:0 0 0 6px #000,0 0 28px rgba(204,0,0,.65);filter:contrast(1.05)}
-.slate{font:700 .75rem/1 "Courier New",monospace;letter-spacing:.3em;color:var(--red);text-transform:uppercase;margin:0 0 10px}
+.slate{display:inline-block;margin:0 0 14px;font-family:"Courier New",monospace;text-transform:uppercase;color:#f2f2f2}
+.slate .stk{display:block;height:14px;background:repeating-linear-gradient(-45deg,#111 0 10px,#f2f2f2 10px 20px);border:1px solid #f2f2f2;transform-origin:0 100%;animation:snap 1.1s ease-out .4s both}
+.slate .sbd{display:flex;background:#111;border:1px solid #f2f2f2;border-top:0}
+.slate b{padding:5px 12px;border-right:1px solid #555;font-size:.95rem;letter-spacing:.12em;line-height:1.1}
+.slate b:last-child{border-right:0}.slate small{display:block;font-size:.55rem;letter-spacing:.25em;color:var(--red);font-weight:700}
+@keyframes snap{0%{transform:rotate(-18deg)}55%{transform:rotate(-18deg)}70%{transform:rotate(0)}80%{transform:rotate(-3deg)}100%{transform:rotate(0)}}
 h1{font-family:Georgia,"Times New Roman",serif;font-weight:400;text-transform:uppercase;letter-spacing:.12em;font-size:clamp(1.7rem,5vw,2.8rem);margin:0;color:#fff;text-shadow:0 0 18px rgba(204,0,0,.35)}
 .hi{margin:6px 0 14px;font-size:1rem;color:var(--red);font-weight:700;letter-spacing:.2em;text-transform:uppercase}
 .btn{display:inline-block;margin-top:14px;background:#000;color:#fff;border:2px solid var(--red);font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-size:.85rem;text-decoration:none;padding:11px 22px;transition:.2s}
@@ -92,7 +97,7 @@ body{background:var(--bg)}html{background:var(--bg)}
   <header class="top">
     <img class="badge" src="photo.jpg" width="400" height="400" alt="Madison 'Madi' Ramon">
     <div>
-      <p class="slate">Scene 1 · Take 1 · Introducing</p>
+      <div class="slate" aria-label="Scene 1, Take 1, Introducing"><span class="stk"></span><span class="sbd"><b><small>Scene</small>1</b><b><small>Take</small>1</b><b class="w"><small>Roll</small>Introducing</b></span></div>
       <h1>Madison “Madi” Ramon</h1>
       <p class="hi">Film Production Professional</p>
       <p class="about">I love every part of making a production come to life. My hands-on experience spans costume and wardrobe, the art department, camera, audio, production and post-production, on feature films, short films, music videos, live entertainment and performance, and theater. I thrive in fast-paced productions where strong organization, adaptability, attention to detail and clear on-set communication make all the difference.</p>
