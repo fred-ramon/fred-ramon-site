@@ -78,11 +78,13 @@ body{background:var(--bg)}html{background:var(--bg)}
 </style>
 <style>
 .eduwrap{display:grid;grid-template-columns:1fr 470px;gap:24px;align-items:center}
-.deck{position:relative;height:390px}
+.deck{position:relative;height:350px}
 .deck img{position:absolute;width:215px;border-radius:6px;border:2px solid #CC0000;box-shadow:0 0 18px rgba(204,0,0,.35),0 10px 22px rgba(0,0,0,.6);transition:transform .3s}
 .deck .c1{top:18px;left:0;transform:rotate(-6deg)}
 .deck .c2{top:42px;left:245px;transform:rotate(5deg)}
-.deck .c3{top:205px;left:125px;transform:rotate(-2deg)}
+.deck .c3{top:225px;left:165px;width:150px;transform:rotate(-2deg);opacity:.8;border:1px solid #6a1a1a;box-shadow:0 8px 18px rgba(0,0,0,.6)}
+.deck .c3:hover{opacity:1}
+.edu p.minor{font-size:.82rem;color:#8a8a90;margin-top:10px}.edu p.minor a{color:#b33;text-decoration:underline}
 .deck img{cursor:zoom-in;transition:transform .35s ease,box-shadow .35s ease}
 .deck .c1{transform-origin:60% 50%}.deck .c2{transform-origin:100% 50%}.deck .c3{transform-origin:50% 80%}
 .deck .c1:hover{transform:rotate(-2deg) scale(2.5)}.deck .c2:hover{transform:rotate(2deg) scale(2.5)}.deck .c3:hover{transform:rotate(0) scale(2.5)}
@@ -162,10 +164,10 @@ body{background:var(--bg)}html{background:var(--bg)}
     <p>Associate in Science, Film Production Technology <span style="color:#CC0000">·</span> August 2026</p>
     <p>Associate in Science, Criminal Justice <span style="color:#CC0000">·</span> August 2026</p>
     <p>Certification in Live Entertainment Design and Production</p>
-    <p>Technical Certificate, Homeland Security Law Enforcement Specialist <span style="color:#CC0000">·</span> December 2025</p>
+    <p class="minor">Technical Certificate, Homeland Security Law Enforcement Specialist · December 2025 · <a href="certs/hs.jpg" target="_blank" rel="noopener">view</a></p>
     </div>
     <div class="deck" aria-label="Diplomas and certificates">
-      <img class="c3" src="certs/hs.jpg" alt="Valencia College Technical Certificate, Homeland Security Law Enforcement Specialist">
+      <a href="certs/hs.jpg" target="_blank" rel="noopener" title="Open full certificate"><img class="c3" src="certs/hs.jpg" alt="Valencia College Technical Certificate, Homeland Security Law Enforcement Specialist"></a>
       <img class="c2" src="certs/cj.jpg" alt="Valencia College diploma, Associate in Science in Criminal Justice">
       <img class="c1" src="certs/film.jpg" alt="Valencia College diploma, Associate in Science in Film Production Technology">
     </div>
