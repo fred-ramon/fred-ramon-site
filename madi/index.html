@@ -93,9 +93,33 @@ body{background:var(--bg)}html{background:var(--bg)}
 @media(max-width:900px){.eduwrap{grid-template-columns:1fr}.deck{height:auto;display:flex;gap:18px;justify-content:center;flex-wrap:wrap;padding:10px 0}.deck img{position:static;width:min(44%,215px)}.deck a{flex-basis:100%;display:flex;justify-content:center}.deck .c3{width:130px}.deck .c1,.deck .c2,.deck .c3{transform-origin:50% 50%}.deck .c1:hover,.deck .c2:hover,.deck .c3:hover{transform:scale(1.5)}}
 </style>
 <style>
+.mail h2.sec{margin-bottom:6px}.mail .sub{color:#b9b9bf;margin:0 0 18px}
+.mail form{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.mail label{display:flex;flex-direction:column;gap:6px;font:700 .7rem/1 "Courier New",monospace;letter-spacing:.2em;text-transform:uppercase;color:var(--red)}
+.mail input,.mail textarea{background:#0b0b0c;border:1px solid #3a3a40;color:#f2f2f2;padding:12px;font:1rem/1.4 inherit;font-family:inherit;border-radius:0;outline:none}
+.mail input:focus,.mail textarea:focus{border-color:#CC0000;box-shadow:0 0 10px rgba(204,0,0,.35)}
+.mail .full{grid-column:1/-1}.mail textarea{min-height:130px;resize:vertical}
+.mail .row{grid-column:1/-1;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.mail button{background:#000;color:#fff;border:2px solid #CC0000;font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-size:.85rem;padding:11px 22px;cursor:pointer;font-family:inherit;transition:.2s}
+.mail button:hover{box-shadow:0 0 14px rgba(204,0,0,.5)}
+.mail button:disabled{opacity:.55;cursor:wait;box-shadow:none}
+.mail .hp{position:absolute!important;left:-9999px;width:1px;height:1px;overflow:hidden}
+.mail .status{grid-column:1/-1;margin:0;font:700 .78rem/1.4 "Courier New",monospace;letter-spacing:.12em;text-transform:uppercase;color:#fff;border-left:3px solid #CC0000;padding:8px 12px;background:rgba(204,0,0,.08)}
+.mail .status[hidden]{display:none}.mail .status.err{color:#ff6b6b;background:rgba(204,0,0,.16)}
+.mail input:invalid:not(:placeholder-shown){border-color:#8B0000}
+.mail .note{font-size:.8rem;color:#8a8a90}
+@media(max-width:600px){.mail form{grid-template-columns:1fr}}
+</style>
+<style>
 .btns .btn{min-width:0;width:220px;padding-left:8px;padding-right:8px;text-align:center;box-sizing:border-box;font-family:inherit;cursor:pointer;line-height:1.2}
+#mailbtn,#mailbtn:hover,#mailbtn[aria-expanded="true"]{background:#000}
+#mailbtn svg{margin-top:-2px;margin-bottom:-2px}
+#mailbtn:hover{box-shadow:0 0 14px rgba(204,0,0,.5)}
+#mailbtn[aria-expanded="true"]{box-shadow:inset 0 0 0 1px #CC0000,0 0 18px rgba(204,0,0,.6);color:#fff}
+.mail{margin-top:14px!important;border-top:2px solid #CC0000}
 @media(max-width:600px){.btns .btn{min-width:0;width:100%}}
 </style>
+<script>document.addEventListener('DOMContentLoaded',function(){var b=document.getElementById('mailbtn'),t=document.getElementById('email');b.onclick=function(){var o=t.hidden;t.hidden=!o;b.setAttribute('aria-expanded',o);if(o){t.scrollIntoView({behavior:'smooth',block:'nearest'});var n=t.querySelector('input[name=name]');if(n)n.focus({preventScroll:true})}};if(location.hash=='#email'){t.hidden=false;b.setAttribute('aria-expanded',true)}});</script>
 <style>.btns .btn,.btns .btn.pri,.btns .btn:hover,.btns .btn.pri:hover{background:#000;border-color:#CC0000}.btns .btn:hover{box-shadow:0 0 14px rgba(204,0,0,.5)}</style>
 </head><body>
 <div class="bgl" aria-hidden="true"><i style="background-image:url(stills/set-pink.jpg)"></i><i style="background-image:url(stills/on-set-monitor.jpg)"></i><i style="background-image:url(stills/clapper.jpg)"></i><i style="background-image:url(stills/script-notebook.jpg)"></i><i style="background-image:url(stills/crew-hallway.jpg)"></i><i style="background-image:url(stills/wardrobe-pink.jpg)"></i></div>
@@ -108,9 +132,50 @@ body{background:var(--bg)}html{background:var(--bg)}
       <h1>Madison “Madi” Ramon</h1>
       <p class="hi">Film Production Professional</p>
       <p class="about">I love every part of making a production come to life. My hands-on experience spans costume and wardrobe, the art department, camera, audio, production and post-production, on feature films, short films, music videos, live entertainment and performance, and theater. I thrive in fast-paced productions where strong organization, adaptability, attention to detail and clear on-set communication make all the difference.</p>
-      <div class="btns"><a class="btn pri" href="resume.pdf" download>&#9660; Download resume</a> <a class="btn" href="https://www.linkedin.com/in/madison-ramon-6663a837b/" target="_blank" rel="noopener">LinkedIn &#8599;</a></div>
+      <div class="btns"><button type="button" class="btn" id="mailbtn" aria-expanded="false" aria-controls="email"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="vertical-align:-3px;margin-right:7px"><path d="M3 5h18a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1zm.8 2v.3l8.2 5.6 8.2-5.6V7H3.8zm16.4 2.7-7.6 5.2a1 1 0 0 1-1.2 0L3.8 9.7V17h16.4V9.7z"/></svg>Shoot me an email</button> <a class="btn pri" href="resume.pdf" download>&#9660; Download resume</a> <a class="btn" href="https://www.linkedin.com/in/madison-ramon-6663a837b/" target="_blank" rel="noopener">LinkedIn &#8599;</a></div>
     </div>
   </header>
+  <section class="card mail secwrap" id="email" hidden>
+    <h2 class="sec">Shoot me an email</h2>
+    <p class="sub">Want to connect about a project or production? Send me a note and I&rsquo;ll get back to you by email.</p>
+    <!-- TODO: After FormSubmit's one-time activation email to madison@ramon.net is confirmed, replace the address in both FormSubmit URLs
+         with FormSubmit's random alias (https://formsubmit.co/<alias>) so the email is not visible in page source. -->
+    <form id="mailform" action="https://formsubmit.co/madison@ramon.net" method="POST" novalidate>
+      <input type="hidden" name="_subject" value="New message from ramon.net/madi">
+      <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="_captcha" value="false">
+      <label>Your name<input type="text" name="name" placeholder="First and last name" autocomplete="name" maxlength="60" required></label>
+      <label>Your email<input type="email" name="email" placeholder="So I can write you back" autocomplete="email" inputmode="email" maxlength="254" required></label>
+      <label class="full">Message<textarea name="message" maxlength="2000" placeholder="What's on your mind?" required></textarea></label>
+      <div class="hp" aria-hidden="true"><label>Website<input type="text" name="_honey" tabindex="-1" autocomplete="off"></label></div>
+      <div class="row"><button type="submit">Send email &#9658;</button><span class="note">Replies go straight to the email you enter.</span></div>
+      <p class="status" id="mailstatus" role="status" aria-live="polite" hidden></p>
+    </form>
+  </section>
+<script>
+(function(){
+  var FS_URL='https://formsubmit.co/ajax/madison@ramon.net';
+  var f=document.getElementById('mailform'),st=document.getElementById('mailstatus'),btn=f.querySelector('button[type=submit]'),lbl=btn.innerHTML;
+  var EM=/^[^\s@<>(),;:"]+@[^\s@<>(),;:"]+\.[A-Za-z]{2,}$/;
+  function show(msg,err){st.textContent=msg;st.className='status'+(err?' err':'');st.hidden=false}
+  f.addEventListener('submit',function(e){
+    e.preventDefault();
+    var el=f.elements,name=el.name.value.trim(),email=el.email.value.trim(),message=el.message.value.trim();
+    if(!name){show('Please add your name.',1);el.name.focus();return}
+    if(!EM.test(email)){show('Please enter a valid email address.',1);el.email.focus();return}
+    if(!message){show('Please write a message.',1);el.message.focus();return}
+    btn.disabled=true;btn.textContent='Sending\u2026';show('Sending your message\u2026');
+    fetch(FS_URL,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({name:name,email:email,message:message,_subject:'New message from ramon.net/madi',_template:'table',_honey:el._honey.value})})
+      .then(function(r){return r.json().catch(function(){return {ok:false}})})
+      .then(function(d){
+        if(d&&(d.success===true||d.success==='true')){f.reset();show('Sent! Thanks, Madi will email you back soon.')}
+        else show("Your message couldn't be sent. Please try again later.",1);
+      })
+      .catch(function(){show("Your message couldn't be sent. Please check your connection and try again.",1)})
+      .then(function(){btn.disabled=false;btn.innerHTML=lbl});
+  });
+})();
+</script>
 
   <h2 class="sec" style="margin:32px 0 0">Featured highlights</h2>
   <div class="grid">
